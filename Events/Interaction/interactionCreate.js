@@ -107,40 +107,10 @@ module.exports = new Event("interactionCreate", async (bot, interaction) => {
         }
 
         if (interaction.customId === "verif") {
-            db.query(`SELECT * FROM verif WHERE bot = ${bot.user.id}`, async (err, req) => {
+            db.query(`SELECT * FROM verif WHERE guild = ${interaction.guild.id}`, async (err, req) => {
 
                 interaction.member.roles.add(req[0].role)
+})
+    interaction.reply({content: `**Tu a désormais accès au serveur !**`, ephemeral: true})
 
-            })
-
-        
-            interaction.reply({content: `**Tu a désormais accès au serveur !**`, ephemeral: true})
-
-        }
-            // CMD GW !
-    
-           /* if(interaction.customId.startsWith("giveaway_")) {
-    
-                let ID = interaction.customId.split("_")[1];
-    
-                db.query(`SELECT * FROM participants WHERE ID = '${interaction.user.id} ${ID}'`, async (err, req) => {
-    
-                    if(req.length < 1) {
-    
-                        let sql = `INSERT INTO participants (ID, giveawayID, userID) VALUES ('${interaction.user.id} ${ID}', '${ID}', '${interaction.user.id}')`
-                        db.query(sql, function(err) {
-                            if(err) throw err;
-                        })
-    
-                        await interaction.reply({content: `Vous participez avec succès au concours \`${ID}\` !`, ephemeral: true})
-    
-                    } else {
-    
-                        db.query(`DELETE FROM participants WHERE ID = '${interaction.user.id} ${ID}'`)
-    
-                        await interaction.reply({content: `Vous retirez votre participation avec succès au concours \`${ID}\` !`, ephemeral: true})
-                    }
-                }) 
-            } */
-       }
-    }) 
+        }}}) 

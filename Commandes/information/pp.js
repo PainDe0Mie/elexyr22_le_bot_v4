@@ -21,7 +21,7 @@ module.exports = new Command({
 
     let embed = new Discord.MessageEmbed()
     .setColor('RANDOM')
-    .setTitle(`Voici la pp de : ${user.tag} !`)
+    .setTitle(`Voici la pp de : ${user.username}`)
     .setImage(user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 }))
     .setTimestamp()
  .setFooter(`Demandé par : ${message.user ? message.user.username : message.author.username}`, message.user ? message.user.displayAvatarURL({dynamic: true}) : message.author.displayAvatarURL({dynamic: true}))

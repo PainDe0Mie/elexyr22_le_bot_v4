@@ -1,6 +1,7 @@
 const Discord = require("discord.js")
 const Command = require("../../Structure/Command")
 const { joinVoiceChannel } = require('@discordjs/voice');
+const chalk = require("chalk")
 
 module.exports = new Command({
 
@@ -14,7 +15,7 @@ module.exports = new Command({
 
     async run(bot, message, args, db) {
         const voice_channel = message.member.voice.channel;
-        if (!voice_channel) return message.reply('Vous devez être dans un salon vocal !');
+        if (!voice_channel) return message.reply('*Vous devez être dans un salon vocal...*');
         
 const connection = joinVoiceChannel({
   channelId: voice_channel.id,
@@ -22,6 +23,7 @@ const connection = joinVoiceChannel({
   adapterCreator: voice_channel.guild.voiceAdapterCreator,
 });
        
-        message.reply("Connecté au Vocal ! <a:Valide_Or:756978408159707136>") 
+        message.reply("Je suis bien connecté au vocal !") 
+        console.log(chalk.yellow(`[CMD] "${message.author.tag}" à utilisé la commande e!join sûr '${message.guild.name}'`))
     }
 })

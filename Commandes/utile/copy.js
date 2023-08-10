@@ -6,7 +6,7 @@ module.exports = new Command({
   name: "copy",
   description: "Permet de copié un salon !",
   utilisation: "",
-  alias: ["copy", "close"],
+  alias: ["copy"],
   permission: Discord.Permissions.FLAGS.ADMINISTRATOR,
   category: "3) Utile",
   cooldown: 5,
@@ -19,7 +19,7 @@ module.exports = new Command({
         
       
 
-    message.channel.clone({reason: `Channel Copy`}).then(c => c.setPosition(bot.channels.position) && c.setName(name) && c.send(`<:Elexyr22:754441336849170543> **Salon copié + renommée par ${name}** <a:Valide_Or:756978408159707136>`)).then(async mess => setTimeout(async () => {mess.delete()}, 5000))
+    message.channel.clone({reason: `Channel Copy`}).then(c => c.setPosition(bot.channels.position) && c.setName(name) && c.send(`<:elexyr22:1067501213085597806> **Salon copié + renommée par ${name}** <a:valide_or:1067501018906108024>`)).then(async mess => setTimeout(async () => {mess.delete()}, 5000))
      
 
   }

@@ -1,5 +1,6 @@
 const Discord = require("discord.js")
 const Command = require("../../Structure/Command")
+const chalk = require("chalk");
 
 module.exports = new Command({
 
@@ -7,16 +8,16 @@ module.exports = new Command({
     description: "Lien d'invite du serveur",
     utilisation: "",
     alias: ["invite-guild", "invites",],
-    permission: "",
+    permission: Discord.Permissions.FLAGS.MANAGE_MESSAGES,
     category: "3) Utile",
     cooldown: 5,
 
     async run(bot, message, args, db) {
-        message.delete()
         const serv = message.guild.name
         const member = message.author
     
         let invite = await message.channel.createInvite({ maxAge: 0, maxUses: 0 }).catch(console.error);
-       member.send(`Invite de __**${serv} :**__ \n\n ${invite} !`).catch(console.error);
+     	message.reply(`Invite de __**${serv} :**__ \n\n ${invite}`).catch(console.error);
+        console.log(chalk.yellow(`[CMD] "${message.author.tag}" à utilisé la commande e!invites sûr '${message.guild.name}'`))
     }
 })

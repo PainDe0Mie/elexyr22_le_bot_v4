@@ -21,5 +21,5 @@ module.exports = new Event("ready", async bot => {
    }, 5000);
 
 
-    console.log(chalk.bgGreen(`${bot.user.username} : En ligne sur ${bot.guilds.cache.size} serveurs, surveille ${bot.guilds.cache.reduce((a, g) => a + g.memberCount, 0)} membres, son ping : ${bot.ws.ping} ms !`))
+    console.log(chalk.bgGreen(`${bot.user.username} (${bot.user.id}) : En ligne sur ${bot.guilds.cache.size} serveurs, surveille ${bot.guilds.cache.reduce((a, g) => a + g.memberCount, 0)} membres, son ping : ${bot.ws.ping} ms !`))
 })

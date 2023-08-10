@@ -17,7 +17,7 @@ module.exports = new Command({
         const msg = message.reply(`*Recherche d'un avatar aléatoire...*`);
         const embed = new Discord.MessageEmbed()
         .setColor("RANDOM")
-        .setTitle(`Avatar de : ${member.user.username} !`)
+        .setTitle(`Avatar de : ${member.user.username}`)
         .setImage(member.user.displayAvatarURL({dynamic: true, size:4096}))
         .setTimestamp()
         .setFooter(`Demandé par : ${message.author.tag}`,message.author.displayAvatarURL({ format: 'png', dynamic: true, size: 32 }))

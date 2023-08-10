@@ -1,6 +1,6 @@
 Merci d'avoir choisi mon bot open source, l'installation est très simple:
 
-Tuto: https://www.youtube.com/watch?v=ZILkZP38v5o
+[Tuto Video](https://www.youtube.com/watch?v=NOnh1QAMqZc)
 
 Si vous rencontrez des problèmes ou avez besoin d'aide, veuillez faire un Pull Requests par Github.
 

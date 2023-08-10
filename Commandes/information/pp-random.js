@@ -14,7 +14,7 @@ module.exports = new Command({
 
     async run(bot, message, args, db) {
         let member = message.guild.members.cache.random();
-        const msg = message.reply(`Recherche d'un avatar aléatoire ... `);
+        const msg = message.reply(`*Recherche d'un avatar aléatoire...*`);
         const embed = new Discord.MessageEmbed()
         .setColor("RANDOM")
         .setTitle(`Avatar de : ${member.user.username} !`)

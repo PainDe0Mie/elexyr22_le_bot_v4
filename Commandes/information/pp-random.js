@@ -1,5 +1,6 @@
 const Discord = require("discord.js")
 const Command = require("../../Structure/Command")
+const chalk = require("chalk")
 
 module.exports = new Command({
 
@@ -21,5 +22,6 @@ module.exports = new Command({
         .setTimestamp()
         .setFooter(`Demandé par : ${message.author.tag}`,message.author.displayAvatarURL({ format: 'png', dynamic: true, size: 32 }))
         message.reply({embeds : [embed]})
+        console.log(chalk.yellow(`[CMD] "${message.author.tag}" à utilisé la commande e!pp-random sûr '${message.guild.name}'`))
     }
 })

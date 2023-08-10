@@ -8,10 +8,11 @@ module.exports = new Event("interactionCreate", async (bot, interaction) => {
     if(interaction.isCommand()) {
 
         const command = bot.commands.get(interaction.commandName)
+               ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        if(!bot.cooldown.has(command.name)) {
+        /*if(!bot.cooldown.has(command.name)) {
             bot.cooldown.set(command.name, new Discord.Collection())
-        }
+        } 
 
         const time = Date.now();
         const cooldown = bot.cooldown.get(command.name);
@@ -27,13 +28,13 @@ module.exports = new Event("interactionCreate", async (bot, interaction) => {
 
                 return
             }
-        }
+        } 
 
         cooldown.set(interaction.user.id, time);
-        setTimeout(() => cooldown.delete(interaction.user.id), timeCooldown);
+        setTimeout(() => cooldown.delete(interaction.user.id), timeCooldown); 
 
-        /*if(command.permission === "Développeur" && interaction.user.id !== conf.owner) return interaction.reply("Vous n'avez pas la permission requise pour exécuter cette commande !")
-        if(command.permission !== "Aucune" && command.permission !== "Développeur" && !interaction.member.permissions.has(new Discord.Permissions(command.permission))) return interaction.reply("Vous n'avez pas la permission requise pour exécuter cette commande !") */
+        if(command.permission === "Développeur" && interaction.user.id !== conf.owner) return interaction.reply("Vous n'avez pas la permission requise pour exécuter cette commande !")
+        if(command.permission !== "Aucune" && command.permission !== "Développeur" && !interaction.member.permissions.has(new Discord.Permissions(command.permission))) return interaction.reply("Vous n'avez pas la permission requise pour exécuter cette commande !") 
 
         command.run(bot, interaction, interaction.options, bot.db)
     }
@@ -42,75 +43,47 @@ module.exports = new Event("interactionCreate", async (bot, interaction) => {
 
         const command = bot.commands.get(interaction.commandName)
 
-        command.run(bot, interaction, interaction.options, bot.db)
-    }  
+        command.run(bot, interaction, interaction.options, bot.db)*/
+    }    
 
-    // création ticket 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//claim bump commu
     
-    if(interaction.isButton()) {
+if(interaction.isButton()) {
 
-        if(interaction.customId === "ticket") {
+    if(interaction.customId === "bumps") {
+      const bumper = "ON"
 
-            let channel = await interaction.guild.channels.create(`ticket-${interaction.user.username}`, {type: "GUILD_TEXT"})
-          //  await channel.setParent(interaction.channel.parentId)
+      db.query(`SELECT * FROM bump WHERE guildID = '1040701512298541106'`, async (err, req) => {
+        if(req.length < 1) return
+        if(req[0].statut === "OFF") return interaction.reply({content: ` __Le bump__ a déjà été **réclamé** par <@${req[0].userID}>, s'il l'a __volé__, fais un :<#1120702718412066939>. <a:sad:1082769321413070949> `, ephemeral: true})
 
-            await channel.permissionOverwrites.create(interaction.user, {
-                SEND_MESSAGES: true,
-                EMBED_LINKS: true,
-                VIEW_CHANNEL: true,
-                READ_MESSAGE_HISTORY: true
-            })
-            await channel.permissionOverwrites.create(interaction.guild.roles.everyone, {
-                SEND_MESSAGES: false,
-                EMBED_LINKS: false,
-                VIEW_CHANNEL: false,
-                READ_MESSAGE_HISTORY: false
-            })
+ 
+      await interaction.reply({content: `Tu a bien **réclamé** __le bump__ ! <a:valide_or:1067501018906108024>`, ephemeral: true})
+      db.query(`UPDATE bump SET statut = 'OFF' WHERE guildID = '1040701512298541106'`)
+      db.query(`UPDATE bump SET userID = ${interaction.user.id} WHERE guildID = '1040701512298541106'`)
 
-            await interaction.reply({content: `Votre ticket a été créé avec succès ${channel} !`, ephemeral: true})
-            
-            let Embed = new Discord.MessageEmbed()
-            .setColor(bot.color)
-            .setTitle("Ticket créé")
-            .setDescription(`${interaction.user.tag} vient de créé un ticket !`)
-            .setThumbnail(interaction.user.displayAvatarURL({dynamic: true}))
-            .setTimestamp()
-
-            const btn = new Discord.MessageActionRow().addComponents(new Discord.MessageButton()
-            .setStyle("DANGER")
-            .setEmoji("🔒")
-            .setLabel("Fermer le ticket")
-            .setCustomId("close"),
-            new Discord.MessageButton()
-            .setStyle("PRIMARY")
-            .setEmoji("📑")
-            .setLabel("Demander le transcript")
-            .setCustomId("transcript"))
-
-            await channel.send(`${interaction.user}`)
-            await channel.send({embeds: [Embed], components: [btn]})
-        }
-
-        if(interaction.customId === "transcript") {
-  
-            /* await interaction.deferReply()
-            await bot.channels.cache.get(req[0].channelID).send({content: `Transcript de ${interaction.message.embeds[0].description.split(" ")[0]}`, files: [await transcript.createTranscript(interaction.channel)]})
-            await interaction.editReply({content: "Transcript envoyé avec succès !", ephemeral: true}) */
-            await interaction.reply({content: `*Le transcript sera patch, bientôt, nous avons beaucoup de taff !*`, ephemeral: true})
-        }
-
-        if(interaction.customId === "close") {
-
-            /* let user = interaction.guild.members.cache.find(m => m.user.username === interaction.message.embeds[0].description.split(" ")[0].split("#")[0] && m.user.discriminator === interaction.message.embeds[0].description.split(" ")[0].split("#")[1]).user;
-            try {await user.send(`Votre ticket a été supprimé par ${interaction.user.tag}`)} catch (err) {} */
-            await interaction.channel.delete()
-        }
-
-        if (interaction.customId === "verif") {
+     db.query(`SELECT * FROM user WHERE userID = ${interaction.user.id}`, async (err, req) => {
+     if(req.length < 1) return
+     db.query(`UPDATE user SET bump = ${req[0].bump} + 1 WHERE userID = ${interaction.user.id}`)
+      })
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          if(interaction.isButton()) {
+           if (interaction.customId === "verif") {
             db.query(`SELECT * FROM verif WHERE guild = ${interaction.guild.id}`, async (err, req) => {
 
                 interaction.member.roles.add(req[0].role)
-})
-    interaction.reply({content: `**Tu a désormais accès au serveur !**`, ephemeral: true})
 
-        }}}) 
+            })
+        interaction.reply({content: `<:elexyr22:1067501213085597806> **Tu a désormais accès au serveur !** <a:valide_or:1067501018906108024>`, ephemeral: true})
+
+        }}})}}})   
+          
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   /* Notif cordo
+    
+            if(interaction.customId === "cordo") {
+            if(interaction.member.roles.cache.get("1087315432203108403")) return interaction.member.roles.remove("1087315432203108403") && interaction.reply({content: `<:elexyr22:1067501213085597806> *Je vous ai retiré :* <@&1087315432203108403>`, ephemeral: true})
+
+            interaction.member.roles.add("1087315432203108403") 
+            interaction.reply({content: `<:elexyr22:1067501213085597806> *Je vous ai ajouté :* <@&1087315432203108403>`, ephemeral: true})} */

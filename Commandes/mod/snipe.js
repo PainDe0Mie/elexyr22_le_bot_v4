@@ -1,6 +1,6 @@
-
 const Discord = require("discord.js")
 const Command = require("../../Structure/Command")
+const chalk = require("chalk")
 
 module.exports = new Command({
 
@@ -25,5 +25,10 @@ module.exports = new Command({
         .setImage(msg.attachments?.first()?.proxyURL)
         .setTimestamp()
         await message.channel.send({embeds: [Embed]})
+        
+            console.log(chalk.yellow(`[CMD] "${message.author.tag}"" à utilisé la commande e!snipe sûr '${message.guild.name}'`))
+            if(message.guild.id !== "1040701512298541106") return;
+            const salon = bot.channels.cache.get("1084195196583018536")
+            salon.send(` ${message.author.tag} à utilisé la commande **e!snipe.** `) 
     }
 })

@@ -23,14 +23,14 @@ module.exports = new Command({
           .setLabel("Se Vérifier"), )
 
           let arg = message.user ? args._hoistedOptions[0].value : args[0]
-          if(!arg) return message.reply("<:Elexyr22:754441336849170543> Veuillez écrire comme ça : `e!verif #salon @rôle` !")
+          if(!arg) return message.reply("Veuillez écrire comme ça : `e!verif #salon @rôle` !")
 
           let channel = message.guild.channels.cache.get(args) || message.mentions.channels.first()
           if(!channel) return message.reply(`*Merci de me donner un salon qui existe...*`)
 
           let rôle = message.user ? args._hoistedOptions[1].value : args[1]
-          if(!rôle) return message.reply("<:Elexyr22:754441336849170543> Veuillez écrire comme ça : `e!verif #salon @rôle` !")
-          if(message.user ? !args._hoistedOptions[0].value : !message.mentions.channels.first()) return message.reply(`<:Elexyr22:754441336849170543> *Merci de me donner un rôle qui existe...*`)
+          if(!rôle) return message.reply("Veuillez écrire comme ça : `e!verif #salon @rôle` !")
+          if(message.user ? !args._hoistedOptions[0].value : !message.mentions.channels.first()) return message.reply(`*Merci de me donner un rôle qui existe...*`)
 
           if (!req.length < 1) {
 
@@ -55,15 +55,5 @@ module.exports = new Command({
           .setImage("https://cdn.discordapp.com/attachments/765158755905961984/1024367257293443163/captcha-google.gif")
           bot.channels.cache.get(channel.id).send({embeds: [embed], components: [btn]})
 
-          message.reply({content: `<:Elexyr22:754441336849170543> La vérif a été envoyé dans ${channel} ! <a:Valide_Or:756978408159707136>`})
-
-
-    
-
-    
-
-    
-        })
-
-    }
-})
+          message.reply({content: `La vérif a été envoyé dans ${channel} !`})
+})}})

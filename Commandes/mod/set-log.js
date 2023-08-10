@@ -16,7 +16,7 @@ module.exports = new Command({
      try{
       let channelID = message.mentions.channels.first()
       if(!args[0]){
-        return message.reply("<:Elexyr22:754441336849170543> Veuillez m'indiquer un salon \n\n Exemple : `e!set-log <#salon>` <a:mmhh2:768183641930334209>")
+        return message.reply("Veuillez m'indiquer un salon \n\n Exemple : `e!set-log <#salon>`")
 
     } else {
         sql = `UPDATE serveur SET logID = '${channelID.id}' WHERE guildID = ${message.guild.id}`
@@ -25,7 +25,7 @@ module.exports = new Command({
 
         })
 
-        message.reply({content: `<:Elexyr22:754441336849170543> Les logs on bien été activé ! <a:Valide_Or:756978408159707136>`})
+        message.reply({content: `Les logs on bien été activé !`})
 
         }
 

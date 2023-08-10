@@ -26,7 +26,7 @@ module.exports = new Command({
 
     let embed = new Discord.MessageEmbed()
     .setColor('RANDOM')
-    .setTitle(`Bannière de : ${user.tag}`)
+    .setTitle(`Bannière de : ${user.username}`)
     .setImage(await (await bot.users.fetch(user.id, {force: true})).bannerURL({dynamic: true, size: 4096}))
     .setTimestamp()
  .setFooter(`Demandé par : ${message.user ? message.user.username : message.author.username}`, message.user ? message.user.displayAvatarURL({dynamic: true}) : message.author.displayAvatarURL({dynamic: true}))

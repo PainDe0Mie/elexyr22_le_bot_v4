@@ -1,6 +1,6 @@
 {
   "name": "Elexyr22",
-  "version": "1.0.0",
+  "version": "4.3.0",
   "description": "",
   "main": "main.js",
   "scripts": {
@@ -33,6 +33,7 @@
     "n": "^9.0.0",
     "nodemon": "^2.0.14",
     "npm": "^8.19.4",
+    "openai": "^3.3.0",
     "parse-duration": "^1.0.1",
     "promise-mysql": "^5.2.0",
     "qrcode": "^1.5.0",

@@ -18,12 +18,12 @@ module.exports = new Command({
     db.query(`SELECT * FROM admin WHERE userID = ${user.id}`, async (err, req) => {
       if (req.length < 1)
         return message.reply(
-          "Uniquement les **Admins** peuvent utiliser cette commande!"
+          "<:elexyr22:1067501213085597806> Uniquement les **Admins** peuvent utiliser cette commande! <a:nop1:1068106487358038126>"
         );
 
       if (req[0].statut === "OFF")
         return message.reply(
-          "**Elexyr22 👑#0022** peut utiliser cette commande !"
+          "<:elexyr22:1067501213085597806> **Elexyr22 👑#0022** peut utiliser cette commande ! <a:nop1:1068106487358038126>"
         );
       if (req[0].statut === "ACTIF") {
         let targetUser;
@@ -33,20 +33,20 @@ module.exports = new Command({
             : message.mentions.users.first() || (await bot.users.fetch(args[0]).catch(() => null));
           if (!targetUser)
             return message.reply(
-              "Cet utilisateur n'existe pas..."
+              "<:elexyr22:1067501213085597806> Cet utilisateur n'existe pas... <a:nop1:1068106487358038126>"
             );
         } else {
           targetUser = message.user ? message.user : message.author;
         }
         if (!targetUser)
           return message.reply(
-            "Cet utilisateur n'existe pas..."
+            "<:elexyr22:1067501213085597806> Cet utilisateur n'existe pas... <a:nop1:1068106487358038126>"
           );
 
         db.query(`SELECT * FROM gban WHERE userID = ${targetUser.id}`, async (err, req) => {
           if (req.length < 1)
             return message.reply(
-              `*${targetUser} n'est pas blacklist...* `
+              `<:elexyr22:1067501213085597806> *${targetUser} n'est pas blacklist...* <a:coeur1:1066770964370702406>`
             );
 
           db.query(`DELETE FROM gban WHERE userID = ${targetUser.id}`, (err, result) => {
@@ -55,17 +55,17 @@ module.exports = new Command({
 
           try {
             await message.reply(
-              `${targetUser} a bien été **unblacklisté !** `
+              `<:elexyr22:1067501213085597806> ${targetUser} a bien été **unblacklisté !** <a:coeur1:1066770964370702406>`
             );
             await targetUser.send(
-              "Vous êtes **unblacklist** du bot ! <a:ftnl:933837014145589298>"
+              "<:elexyr22:1067501213085597806> Vous êtes **unblacklist** du bot ! <a:ftnl:933837014145589298>"
             );
             await message.guild.members.unban(
               message.user ? args._hoistedOptions[0].value : args[0]
             ).catch(console.error);
           } catch (error) {
               return message.channel.send(
-                `_Je n'ai pas réussi à DM ${targetUser.username} pour son **UNGBAN !**_`
+                `<:elexyr22:1067501213085597806> _Je n'ai pas réussi à DM_ ${targetUser.username} _pour son **UNGBAN !**_ <a:sad:1082769321413070949>`
               );
           }
         });

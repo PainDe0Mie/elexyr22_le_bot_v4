@@ -17,26 +17,26 @@ module.exports = new Command({
         
          console.log(chalk.yellow(`[CMD] "${message.author.tag}" à utilisé la commande e!level sûr '${message.guild.name}'`))
         
-    if(message.guild.id !== "1040701512298541106") return message.reply(" Vous pouvez seulement utilisé cette commande sûr la 🎁・`Taverne d'Elexyr22`")
-    if(message.channel.id !== "1117140638765424842" && message.channel.id !== "1065700513087225906") return message.delete()
+  /*  if(message.guild.id !== "1040701512298541106") return message.reply("<:elexyr22:1067501213085597806> Vous pouvez seulement utilisé cette commande sûr la 🎁・`Taverne d'Elexyr22` <a:nop1:1068106487358038126>")
+    if(message.channel.id !== "1117140638765424842" && message.channel.id !== "1065700513087225906") return message.delete() */
 
     let user;
     if(message.user ? args._hoistedOptions.length >= 1 : args.length >= 1) {
         user = message.user ? await bot.users.fetch(args._hoistedOptions[0].value).catch(() => null) : (message.mentions.users.first() || await bot.users.fetch(args[0]).catch(() => null))
-        if(!user) return message.reply(" Cet utilisateur n'existe pas...");
+        if(!user) return message.reply("<:elexyr22:1067501213085597806> Cet utilisateur n'existe pas... <a:nop1:1068106487358038126>");
     } else {
         user = message.user ? message.user : message.author;
     }
-    if(!user) return message.reply(" Cet utilisateur n'existe pas...");
+    if(!user) return message.reply("<:elexyr22:1067501213085597806> Cet utilisateur n'existe pas... <a:nop1:1068106487358038126>");
  
     db.query(`SELECT * FROM user WHERE userID = ${user.id}`, async (err, req) => {
-      if (req.length < 1) return message.reply(" *Cette personne n'est pas enregistrée dans le bot...*\n\n envoye un message dans <#1085672913778253894> pour commencé le gain xp !")
+      if (req.length < 1) return message.reply("<:elexyr22:1067501213085597806> *Cette personne n'est pas enregistrée dans le bot...* <a:snif:1069970251279769641> \n\n envoye un message dans <#1085672913778253894> pour commencé le gain xp !")
 
       const time = req[0].voiceTime;
       const minutes = Math.round(time / 60);
       const hours = minutes ? Math.floor(minutes / 60) : '0';
       const role = message.member.roles.cache.has("1078363687666057409")
-      const check = role ? "✅" : "✖"
+      const check = role ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
 
                   //--------------------------------//
                   let nextLevelVOC1 = 3600
@@ -53,7 +53,7 @@ module.exports = new Command({
 
                   
       const role1 = (req[0].voiceTime >= nextLevelVOC1)
-      const check1 = role1 ?"✅" : "✖"
+      const check1 = role1 ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
       const embed = new MessageEmbed()
           .setColor(bot.color)
       	  .setAuthor(`Rank de ${user.username}\nTon niveau: ${req[0].level} / 10`)
@@ -134,10 +134,10 @@ module.exports = new Command({
 
         if (value === 'niveau1') {
             const role = message.member.roles.cache.has("1078363687666057409");
-            const check = role ?"✅" : "✖"
+            const check = role ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
 
             const role1 = (req[0].voiceTime >= nextLevelVOC1)
-            const check1 = role1 ?"✅" : "✖"
+            const check1 = role1 ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
 
           const newEmbed = new MessageEmbed()
             .setColor(bot.color)
@@ -151,9 +151,9 @@ module.exports = new Command({
             
         } else if (value === 'niveau2') {
             const role = message.member.roles.cache.has("1065700488038854676");
-            const check = role ?"✅" : "✖"
+            const check = role ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role1 = (req[0].voiceTime >= nextLevelVOC2)
-            const check1 = role1 ?"✅" : "✖"
+            const check1 = role1 ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             
           const newEmbed = new MessageEmbed()
           .setColor(bot.color)
@@ -167,9 +167,9 @@ module.exports = new Command({
             
         } else if (value === 'niveau3') {
             const role = message.member.roles.cache.has("1065700486029783271");
-            const check = role ?"✅" : "✖"
+            const check = role ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role1 = (req[0].voiceTime >= nextLevelVOC3)
-            const check1 = role1 ?"✅" : "✖"
+            const check1 = role1 ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             
           const newEmbed = new MessageEmbed()
           .setColor(bot.color)
@@ -183,13 +183,13 @@ module.exports = new Command({
             
         } else if (value === 'niveau4') {
             const role = message.member.roles.cache.has("1065700483416739911");
-            const check = role ?"✅" : "✖"
+            const check = role ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role2 = (req[0].bump >= "1")
-            const check2 = role2 ? "✅" : "✖"
+            const check2 = role2 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role3 = message.member.roles.cache.has("1065700492581273680")
-            const check3 = role3 ? "✅" : "✖"
+            const check3 = role3 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role1 = (req[0].voiceTime >= nextLevelVOC4)
-            const check1 = role1 ?"✅" : "✖"
+            const check1 = role1 ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             
           const newEmbed = new MessageEmbed()
           .setColor(bot.color)
@@ -203,13 +203,13 @@ module.exports = new Command({
             
         } else if (value === 'niveau5') {
           const role = message.member.roles.cache.has("1102211031956209775");
-          const check = role ?"✅" : "✖"
+          const check = role ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role2 = (req[0].bump >= "3")
-            const check2 = role2 ? "✅" : "✖"
+            const check2 = role2 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role3 = message.member.roles.cache.has("1065700492581273680")
-            const check3 = role3 ? "✅" : "✖"
+            const check3 = role3 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role1 = (req[0].voiceTime >= nextLevelVOC5)
-            const check1 = role1 ?"✅" : "✖"
+            const check1 = role1 ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
 
           const newEmbed = new MessageEmbed()
           .setColor(bot.color)
@@ -223,13 +223,13 @@ module.exports = new Command({
             
         } else if (value === 'niveau6') {
             const role = message.member.roles.cache.has("1102211197782208522");
-            const check = role ?"✅" : "✖"
+            const check = role ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role2 = (req[0].bump >= "3")
-            const check2 = role2 ? "✅" : "✖"
+            const check2 = role2 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role3 = message.member.roles.cache.has("1065700492581273680")
-            const check3 = role3 ? "✅" : "✖"
+            const check3 = role3 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role1 = (req[0].voiceTime >= nextLevelVOC6)
-            const check1 = role1 ?"✅" : "✖"
+            const check1 = role1 ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             
           const newEmbed = new MessageEmbed()
           .setColor(bot.color)
@@ -243,15 +243,15 @@ module.exports = new Command({
             
         } else if (value === 'niveau7') {
             const role = message.member.roles.cache.has("1102249604688379944");
-            const check = role ?"✅" : "✖"
+            const check = role ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role2 = (req[0].bump >= "10")
-            const check2 = role2 ? "✅" : "✖"
+            const check2 = role2 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role3 = message.member.roles.cache.has("1065700492581273680")
-            const check3 = role3 ? "✅" : "✖"
+            const check3 = role3 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role4 = (req[0].event >= "3") 
-            const check4 = role4 ? "✅" : "✖"
+            const check4 = role4 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role1 = (req[0].voiceTime >= nextLevelVOC7)
-            const check1 = role1 ?"✅" : "✖"
+            const check1 = role1 ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             
           const newEmbed = new MessageEmbed()
           .setColor(bot.color)
@@ -265,15 +265,15 @@ module.exports = new Command({
             
         } else if (value === 'niveau8') {
           const role = message.member.roles.cache.has("1102211287389306961");
-          const check = role ?"✅" : "✖"
+          const check = role ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
           const role2 = (req[0].bump >= "15")
-          const check2 = role2 ? "✅" : "✖"
+          const check2 = role2 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
           const role3 = message.member.roles.cache.has("1065700492581273680")
-          const check3 = role3 ? "✅" : "✖"
+          const check3 = role3 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
           const role1 = (req[0].voiceTime >= nextLevelVOC8)
-          const check1 = role1 ?"✅" : "✖"
+          const check1 = role1 ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
           const role5 = (req[0].event >= "3")
-          const check5 = role5 ? "✅" : "✖"
+          const check5 = role5 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             
           const newEmbed = new MessageEmbed()
           .setColor(bot.color)
@@ -287,15 +287,15 @@ module.exports = new Command({
             
         } else if (value === 'niveau9') {
             const role = message.member.roles.cache.has("1102211394893529119");
-            const check = role ?"✅" : "✖"
+            const check = role ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role2 = (req[0].bump >= "30")
-            const check2 = role2 ? "✅" : "✖"
+            const check2 = role2 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role3 = message.member.roles.cache.has("1065700492581273680")
-            const check3 = role3 ? "✅" : "✖"
+            const check3 = role3 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role4 = (req[0].event >= "5")
-            const check4 = role4 ? "✅" : "✖"
+            const check4 = role4 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role1 = (req[0].voiceTime >= nextLevelVOC9)
-            const check1 = role1 ?"✅" : "✖"
+            const check1 = role1 ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             
           const newEmbed = new MessageEmbed()
           .setColor(bot.color)
@@ -309,13 +309,13 @@ module.exports = new Command({
             
         } else if (value === 'niveau10') {
             const role = message.member.roles.cache.has("1102211467408851004");
-            const check = role ?"✅" : "✖"
+            const check = role ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role2 = (req[0].bump >= "40")
-            const check2 = role2 ? "✅" : "✖"
+            const check2 = role2 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role3 = message.member.roles.cache.has("1065700492581273680")
-            const check3 = role3 ? "✅" : "✖"
+            const check3 = role3 ? "<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             const role1 = (req[0].voiceTime >= nextLevelVOC10)
-            const check1 = role1 ?"✅" : "✖"
+            const check1 = role1 ?"<a:oui:1069328716922101830>" : "<a:non:1069328732554281080>"
             
             
             

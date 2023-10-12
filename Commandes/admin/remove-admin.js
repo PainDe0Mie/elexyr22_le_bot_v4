@@ -24,9 +24,11 @@ module.exports = new Command({
        if(user == undefined) return message.reply("*Veuillez mentionner un utilisateur ou fournir un ID valide...*");
 
        db.query(`SELECT * FROM admin WHERE userID = ${user.id}`, async (err, req) => {
-        if(req.length < 1) return;
+        if(req.length < 1) return(`<:elexyr22:1067501213085597806> ${user.username} est déjà retiré des **Admins !** <a:alerte2:1067594465344225322>`);
 
-        db.query(`UPDATE admin SET statut = 'OFF' WHERE userID = ${user.id}`)
+        db.query(`DELETE FROM admin WHERE userID = ${user.id}`, (err, result) => {
+          if (err) throw err;
+        });
 
-           return message.reply(`${user.username} a bien été retiré des **Admin !**`);
+           return message.reply(`<:elexyr22:1067501213085597806> ${user.username} a bien été retiré des **Admin !** <a:alerte2:1067594465344225322>`);
 })}})

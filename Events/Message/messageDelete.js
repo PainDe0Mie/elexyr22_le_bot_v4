@@ -18,9 +18,10 @@ module.exports = new Event("messageDelete", async (bot, message) => {
     const LatestMessageDeleted = AuditsLogs.entries.first();
     
     let Embed = new Discord.MessageEmbed()
-    .setColor("PURPLE")
-    .setTitle("New Message supprimé :")
-    .setDescription(`Auteur du message : ${message.author} *(${message.author.id})*\nDate de création du message : <t:${Math.floor(message.createdAt / 1000)}:F>\n Dans : <#${message.channel.id}> \nContenu : \`\`\`${message.content}\`\`\``)
+    .setColor("#e000ff")
+    .setThumbnail(message.author.displayAvatarURL({dynamic: true}))
+    .setTitle("New Message Delete:")
+    .setDescription(`Auteur: ${message.author} \n\nDate: <t:${Math.floor(message.createdAt / 1000)}:F> \n\nDans: <#${message.channel.id}> \n\nContenu  \`\`\`${message.content}\`\`\``)
      .setTimestamp()
 
     db.query(`SELECT * FROM serveur WHERE guildID = ${message.guildId}`, async (err, req) => {

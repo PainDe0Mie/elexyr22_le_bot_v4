@@ -11,7 +11,21 @@ module.exports = new Event("guildBanRemove", async (bot, unban, guild) => {
     if(audit.action === "MEMBER_BAN_REMOVE" == true){
  
 
+const db = bot.db;
+
 console.log(chalk.green(`[NEW UNBAN :] ${unban.user.username} à été unban par "${audit.executor.username}" sûr le serveur '${unban.guild.name}'`))
-  //console.log(chalk.cyan(`[NEW MESSAGE :] ${member.username}  à envoyé le message "${message.content}" dans le channel : < ${message.channel.name} > sûr le serveur '${message.guild.name}' (${message.guildId})`))  
-    
-}}})
+
+let Embed = new Discord.MessageEmbed()
+.setColor("YELLOW")
+.setThumbnail(unban.user.displayAvatarURL({dynamic: true}))
+.setTitle("New Uban:")
+.setDescription(`**${unban.user} - ${unban.user.username}** *(${unban.user.id})* viens d'être unban par ${audit.executor}`)
+ .setTimestamp()
+ 
+db.query(`SELECT * FROM serveur WHERE guildID = ${unban.guild.id}`, async (err, req) => {
+	if(req.length < 1) return
+
+   let channel = unban.guild.channels.cache.get(`${req[0].logID}`)
+    if(!channel) return;
+    await channel.send({embeds: [Embed]})
+})}}})

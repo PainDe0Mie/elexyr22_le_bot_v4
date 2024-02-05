@@ -54,14 +54,14 @@ if(interaction.isButton()) {
     if(interaction.customId === "bumps") {
       const bumper = "ON"
 
-      db.query(`SELECT * FROM bump WHERE guildID = '1040701512298541106'`, async (err, req) => {
+      db.query(`SELECT * FROM bump WHERE guildID = '${interaction.guild.id}'`, async (err, req) => {
         if(req.length < 1) return
         if(req[0].statut === "OFF") return interaction.reply({content: ` __Le bump__ a déjà été **réclamé** par <@${req[0].userID}>, s'il l'a __volé__, fais un :<#1120702718412066939>. <a:sad:1082769321413070949> `, ephemeral: true})
 
  
       await interaction.reply({content: `Tu a bien **réclamé** __le bump__ ! <a:valide_or:1067501018906108024>`, ephemeral: true})
-      db.query(`UPDATE bump SET statut = 'OFF' WHERE guildID = '1040701512298541106'`)
-      db.query(`UPDATE bump SET userID = ${interaction.user.id} WHERE guildID = '1040701512298541106'`)
+      db.query(`UPDATE bump SET statut = 'OFF' WHERE guildID = '${interaction.guild.id}'`)
+      db.query(`UPDATE bump SET userID = ${interaction.user.id} WHERE guildID = '${interaction.guild.id}'`)
 
      db.query(`SELECT * FROM user WHERE userID = ${interaction.user.id}`, async (err, req) => {
      if(req.length < 1) return

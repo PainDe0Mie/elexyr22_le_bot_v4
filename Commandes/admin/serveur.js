@@ -11,23 +11,25 @@ module.exports = new Command({
     category: "",
     cooldown: 5,
 
-    async run(bot, message, args, db) {
+    async run(bot, message, args) {
         
-        message.delete()
-        
-if(message.author.id !== "1046761650675519499" && message.author.id !== "1027614030426284043" && message.author.id !== "1000825879221514302" && message.author.id !== "956183732841250946" && message.author.id !== "1010101361809047633") return
-        
+        const db = bot.db;
+        const user = message.author
+    
+        db.query(`SELECT * FROM admin WHERE userID = ${user.id}`, async (err, req) => {
+        if(req.length < 1) return message.reply(" Uniquement les **Admins** peut utilisé cette commande ! ") 
+    
+      if(req[0].statut === "OFF") return message.reply(" Uniquement les **Admins** peut utilisé cette commande ! ") 
+      if(req[0].statut === "ACTIF") {
+          
         let bgdecyber = bot.guilds.cache.map((guild, i) => `\n\n ${guild.name} : (${guild.id}) : ${guild.memberCount}`)
-        
-        message.reply("Liste des serveurs envoyé dans la console !")
+        //message.reply("Liste des serveurs envoyé dans la console !")
 
-        /* const cyberbg = new Discord.MessageEmbed()
+        const cyberbg = new Discord.MessageEmbed()
         .setColor("BLUE")
         .setTitle("Liste des serveurs du bot :")
         .setDescription(`${bgdecyber}`)
         .setFooter(`Demandé par : ${message.user ? message.user.username : message.author.username}`, message.user ? message.user.displayAvatarURL({dynamic: true}) : message.author.displayAvatarURL({dynamic: true}))
-        message.reply({embeds: [cyberbg]}) */
-
+        message.reply({embeds: [cyberbg]}) 
         console.log(`${bgdecyber}`)
-    }
-})
+    }})}})

@@ -3,7 +3,7 @@ const Event = require("../../Structure/Event")
 
 module.exports = new Event("guildMemberAdd", async (bot, member, user, guild) => {
 
-    const serv = member.guild.name
+    let serv = member.guild.name
 
     const db = bot.db;
 
@@ -15,9 +15,9 @@ module.exports = new Event("guildMemberAdd", async (bot, member, user, guild) =>
         
     if(req[0].welcome === "on") {
 
-    const bvn = member.guild.channels.cache.get(`${req[0].welcomeID}`)
+    let bvn = member.guild.channels.cache.get(`${req[0].welcomeID}`)
     if(!bvn) return 
     
-	bvn.send(`<:Elexyr22:754441336849170543> Bienvenue ${member}, sûr le serveur **${serv} !**\n\n Passe un **agréable** moment dessus ! <a:bvn:1018938483244548096>`)
+	bvn.send(`Bienvenue ${member}, sûr le serveur **${serv} !**\n\n Passe un **agréable** moment dessus !`)
 
 }}})})

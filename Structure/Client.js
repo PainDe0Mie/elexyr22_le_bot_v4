@@ -4,6 +4,7 @@ const intents = new Discord.Intents(3276543);
 const Command = require("./Command");
 const Database = require("./Database");
 const Event = require("./Event");
+const chalk = require("chalk");
 
 class Client extends Discord.Client {
 
@@ -22,7 +23,11 @@ class Client extends Discord.Client {
         this.db = Database;
         this.color = "#ffe700";
         this.function = {
-            createID: require("../Fonctions/createID")
+            createID: require("../Fonctions/createID"),
+            createCaptcha: require("../Fonctions/createCaptcha"),
+            searchLinks: require("../Fonctions/searchLinks"),
+            searchMentions: require("../Fonctions/searchMentions"),
+            searchSpam: require("../Fonctions/searchSpam")
         }
     }
 
@@ -54,7 +59,7 @@ class Client extends Discord.Client {
                 */
 
                 const event = require(`../Events/${dirs}/${evt}`);
-                console.log(`${event.event}.js événement chargé avec succès !`)
+                console.log(chalk.bgWhite(`${event.event}.js événement chargé avec succès !`))
                 this.on(event.event, event.run.bind(null, this));
             })
         });

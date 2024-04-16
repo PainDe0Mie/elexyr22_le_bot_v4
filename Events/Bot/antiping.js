@@ -2,21 +2,23 @@ const Discord = require("discord.js");
 const Event = require("../../Structure/Event");
 const ms = require("ms");
 
-// Liste des utilisateurs interdits de ping: elexyr, sho, pain, magic, lodi et Adam
-const forbiddenUsers = ["1088442920530620477", "902859548740698144", "625762406559121419", "700417479243071608", "449249368998936587", "1131737651423219762"];
+const forbiddenUsers = ["ID1", "ID2", "ID3"]; //List des personne à pas ping
 
-const disabledCategoryID = "1065927424900071494"
+const allowedChannels = ["ID1", "ID2", "ID3"]; // Liste des salons autorisés
+
 
 module.exports = new Event("messageCreate", async (bot, message, guild, args) => {
+if(message.guild.id !== "1040701512298541106") return
 
     const db = bot.db;
     const user = message.author;
-    if (message.author.bot || message.system) return;
-    
-    if (message.channel.parent && message.channel.parent.id === disabledCategoryID) {
-        return; // Désactiver l'anti-ping dans cette catégorie
-    }
+    if(message.author.bot || message.system) return;
 
+    let robot = "1013135812545753119" //ID de ton Bot
+    
+    if (allowedChannels.includes(message.channel.id)) {
+        return; // Ignorer les messages dans les salons autorisés
+    }
 
     db.query(`SELECT * FROM wl WHERE userID = ${user.id}`, async (err, req) => {
         if (req.length < 1) {
@@ -29,16 +31,15 @@ module.exports = new Event("messageCreate", async (bot, message, guild, args) =>
                     const pingCount = pingResult.length > 0 ? parseInt(pingResult[0].nombre) + 1 : 1;
                     const muteDuration = ms(`${pingCount * 2}m`); // Calculer la durée du mute en fonction du nombre de pings
 
-const muteDurationMinutes = muteDuration / 60000; // Convertir la durée du mute en minutes
-message.reply(`<:elexyr22:1067501213085597806> Il est interdit de **ping** un membre du staff. Vous avez été mute pendant \`${muteDurationMinutes} minutes\` <a:nop1:1068106487358038126>`);
+                    const muteDurationMinutes = muteDuration / 60000; // Convertir la durée du mute en minutes
+                    message.reply(`Il est interdit de **ping** un staff. Vous avez été muté pendant \`${muteDurationMinutes} minutes\` `);
 
-                    
-                    await message.guild.members.cache.get(message.author.id).timeout(muteDuration, "Ping Admin");
-
-                    let sql = `INSERT INTO warns (userID, authorID, warnID, guildID, reason, date) VALUES (${message.author.id}, '1013135812545753119', '${ID}', '${message.guildId}', 'Ping Elexyr22 [Automod]', '${Date.now()}')`
+                    let sql = `INSERT INTO warns (userID, authorID, warnID, guildID, reason, date) VALUES (${message.author.id}, '${robot}', '${ID}', '${message.guildId}', 'Ping Elexyr22 [Automod]', '${Date.now()}')`
                     db.query(sql, function (err) {
                         if (err) throw err;
                     })
+
+                    await message.guild.members.cache.get(message.author.id).timeout(muteDuration, "Ping Admin");
 
                     if (pingResult.length < 1) {
                         sql = `INSERT INTO ping (userID, nombre) VALUES (${message.author.id}, '1')`

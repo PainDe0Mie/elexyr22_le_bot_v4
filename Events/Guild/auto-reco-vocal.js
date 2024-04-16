@@ -2,7 +2,7 @@ const { joinVoiceChannel } = require('@discordjs/voice');
 const Event = require("../../Structure/Event");
 
 // Les IDs des salons vocaux cibles
-const targetVoiceChannelIds = ["1186064749113380946"];
+const targetVoiceChannelIds = ["ID"];
 
 module.exports = new Event("voiceStateUpdate", async (bot, oldState, newState) => {
   const db = bot.db;

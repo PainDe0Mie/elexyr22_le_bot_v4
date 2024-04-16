@@ -1,5 +1,6 @@
 const Discord = require("discord.js")
 const Event = require("../../Structure/Event");
+const ms = require("ms");
 
 module.exports = new Event("interactionCreate", async (bot, interaction) => {
 
@@ -56,10 +57,10 @@ if(interaction.isButton()) {
 
       db.query(`SELECT * FROM bump WHERE guildID = '${interaction.guild.id}'`, async (err, req) => {
         if(req.length < 1) return
-        if(req[0].statut === "OFF") return interaction.reply({content: ` __Le bump__ a déjà été **réclamé** par <@${req[0].userID}>, s'il l'a __volé__, fais un :<#1120702718412066939>. <a:sad:1082769321413070949> `, ephemeral: true})
+        if(req[0].statut === "OFF") return interaction.reply({content: ` __Le bump__ a déjà été **réclamé** par <@${req[0].userID}>, s'il l'a __volé__, fais un: Ticket. `, ephemeral: true})
 
  
-      await interaction.reply({content: `Tu a bien **réclamé** __le bump__ ! <a:valide_or:1067501018906108024>`, ephemeral: true})
+      await interaction.reply({content: `Tu a bien **réclamé** __le bump__ ! `, ephemeral: true})
       db.query(`UPDATE bump SET statut = 'OFF' WHERE guildID = '${interaction.guild.id}'`)
       db.query(`UPDATE bump SET userID = ${interaction.user.id} WHERE guildID = '${interaction.guild.id}'`)
 
@@ -67,23 +68,30 @@ if(interaction.isButton()) {
      if(req.length < 1) return
      db.query(`UPDATE user SET bump = ${req[0].bump} + 1 WHERE userID = ${interaction.user.id}`)
       })
-          ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          if(interaction.isButton()) {
-           if (interaction.customId === "verif") {
-            db.query(`SELECT * FROM verif WHERE guild = ${interaction.guild.id}`, async (err, req) => {
 
-                interaction.member.roles.add(req[0].role)
+      let time = "2h"
+      let parsedTime = ms(time);
+      let triggerTime = Date.now() + parsedTime;
 
-            })
-        interaction.reply({content: `<:elexyr22:1067501213085597806> **Tu a désormais accès au serveur !** <a:valide_or:1067501018906108024>`, ephemeral: true})
+  let reason = " ``/bump`` avec <@302050872383242240> !"
 
-        }}})}}})   
+  // Insérer les informations du minuteur dans la table "timers"
+  let sql = `INSERT INTO rmd (userID, timer, reason) VALUES ('${interaction.user.id}', '${triggerTime}', '${reason}')`;
+  db.query(sql, function (err) {
+    if (err) {
+      console.error("Erreur lors de l'insertion du minuteur :", err);
+      return interaction.channel.send("*Une erreur s'est produite lors de la définition du minuteur...*");
+    }
+    const timestampInMilliseconds = triggerTime
+    const timestampInSeconds = Math.floor(timestampInMilliseconds / 1000);  
+
+    })})}}})
           
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   /* Notif cordo
-    
-            if(interaction.customId === "cordo") {
-            if(interaction.member.roles.cache.get("1087315432203108403")) return interaction.member.roles.remove("1087315432203108403") && interaction.reply({content: `<:elexyr22:1067501213085597806> *Je vous ai retiré :* <@&1087315432203108403>`, ephemeral: true})
+/*if(interaction.isButton()) {
+    if (interaction.customId === "verif") {
+     db.query(`SELECT * FROM verif WHERE guild = ${interaction.guild.id}`, async (err, req) => {
 
-            interaction.member.roles.add("1087315432203108403") 
-            interaction.reply({content: `<:elexyr22:1067501213085597806> *Je vous ai ajouté :* <@&1087315432203108403>`, ephemeral: true})} */
+         interaction.member.roles.add(req[0].role)
+
+     })
+ interaction.reply({content: `<:elexyr22:1067501213085597806> **Tu a désormais accès au serveur !** <a:valide_or:1067501018906108024>`, ephemeral: true}) */

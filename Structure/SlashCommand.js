@@ -3,6 +3,7 @@ const { Routes } = require("discord-api-types/v9")
 const Builders = require("@discordjs/builders")
 const { SlashCommandBuilder } = require("@discordjs/builders")
 const { token } = require("../config")
+const chalk = require("chalk");
 
 module.exports = async(bot) => {
 
@@ -12,8 +13,8 @@ module.exports = async(bot) => {
 
     bot.guilds.cache.forEach(async guild => {
         
-        await rest.put(Routes.applicationGuildCommands(bot.user.id, guild.id), { body: commands });
+        await rest.put(Routes.applicationGuildCommands(bot.user.id, guild.id), { body: commands }).catch(err => {if(err.code == "50001") return}) ;
     })
 
-    console.log("Les slashs commandes ont été créées avec succès !")
+    console.log(chalk.bgCyan("Les slashs commandes ont été créées avec succès !"))
 }

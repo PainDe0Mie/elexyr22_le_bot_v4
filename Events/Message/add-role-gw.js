@@ -5,12 +5,12 @@ module.exports = new Event("messageCreate", async (bot, message, guild) => {
 if(message.author.bot) return;
 if(message.guild === null) return;
 
-    const channelId = "1227524825270980628"; // ID du salon où vous voulez gérer les rôles
-    const roleId = "123"; // Remplacez "ROLE_ID" par l'ID du rôle que vous souhaitez ajouter ou retirer
+    const channelId = "ID"; // ID du salon où vous voulez gérer les rôles
+    const roleId = "ID"; // Remplacez "ROLE_ID" par l'ID du rôle que vous souhaitez ajouter ou retirer
 
     if (message.channel.id === channelId) {
         const member = message.guild.members.cache.get(message.author.id);
-        await message.react("<a:etoile:1227524842161704980>")
+        await message.react("EMOJI")
 
         if (member.roles.cache.has(roleId)) {
             try {

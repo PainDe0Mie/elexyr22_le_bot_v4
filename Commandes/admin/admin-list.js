@@ -3,25 +3,33 @@ const Command = require("../../Structure/Command");
 const chalk = require("chalk");
 
 module.exports = new Command({
-    name: "getusers",
-    description: "Récupère et affiche la liste de tous les utilisateurs dans la base de données",
+    name: "",
+    description: "",
     utilisation: "",
-    alias: ["admin-list"],
-    permission: "ADMINISTRATOR",
+    alias: ["admin-list", "list-admin"],
+    permission: "",
     category: "",
     cooldown: 10,
 
     async run(bot, message, args) {
+
         const db = bot.db;
+        const user = message.author
+    
+        db.query(`SELECT * FROM admin WHERE userID = ${user.id}`, async (err, req) => {
+        if(req.length < 1) return message.reply(" Uniquement les **Admins** peut utilisé cette commande ! <a:nop1:1068106487358038126>") 
+    
+      if(req[0].statut === "OFF") return message.reply(" Uniquement les **Admins** peut utilisé cette commande ! <a:nop1:1068106487358038126>") 
+      if(req[0].statut === "ACTIF") {
 
         db.query("SELECT * FROM admin", (err, rows) => {
             if (err) {
                 console.error(chalk.red("Erreur lors de la récupération des utilisateurs depuis la base de données :"), err);
-                return message.channel.send("Une erreur s'est produite lors de la récupération des utilisateurs depuis la base de données.");
+                return message.reply("*Une erreur s'est produite lors de la récupération des utilisateurs depuis la base de données...*");
             }
 
             if (rows.length === 0) {
-                return message.channel.send("Il n'y a aucun utilisateur dans la base de données.");
+                return message.reply("*Il n'y a aucun utilisateur dans la base de données...*");
             }
 
             const users = rows.map((row) => {
@@ -44,12 +52,14 @@ module.exports = new Command({
             const endIdx = startIdx + usersPerPage;
             const usersToShow = users.slice(startIdx, endIdx);
 
-            const userList = usersToShow.map((user) => `User: ${user.username}\n ID: ${user.userID}\n Raison: ${user.reason}`).join("\n\n");
+            const userList = usersToShow.map((user) => `User: <@${user.userID}> | *(${user.username})*\n ID: \`\`${user.userID}\`\``).join("\n\n");
 
             const embed = new Discord.MessageEmbed()
-                .setColor("#ff0000") // Changement de la couleur à rouge (#ff0000)
+                .setColor("#ff0000") 
                 .setTitle(`Liste des admins (Page ${pageNumber}/${totalPages}):`)
-                .setDescription(userList);
+                .setDescription(userList)
+                .setTimestamp()
+                .setFooter(`Demandé par : ${message.user ? message.user.username : message.author.username}`, message.user ? message.user.displayAvatarURL({dynamic: true}) : message.author.displayAvatarURL({dynamic: true}))
 
             message.reply({ embeds: [embed] }).then((sentMessage) => {
                 if (totalPages > 1) {
@@ -81,7 +91,7 @@ module.exports = new Command({
 
                         const userList = usersToShow.map((user) => `User: ${user.username}\n ID: ${user.userID}\n Raison: ${user.reason}`).join("\n\n");
 
-                        embed.setDescription(userList).setTitle(`Liste des GBANS (Page ${pageNumber}/${totalPages}):`);
+                        embed.setDescription(userList).setTitle(`Liste des Admins (Page ${pageNumber}/${totalPages}):`);
                         sentMessage.edit({ embeds: [embed] }).catch(console.error);
                     });
 
@@ -91,5 +101,5 @@ module.exports = new Command({
                 }
             });
         });
-    },
-});
+    }
+})}})

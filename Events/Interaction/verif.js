@@ -12,7 +12,7 @@ module.exports = new Event("interactionCreate", async (bot, interaction) => {
                 interaction.member.roles.add(req[0].role)
 
             })
-        interaction.reply({content: `<:elexyr22:1067501213085597806> **Tu a désormais accès au serveur !** <a:valide_or:1067501018906108024>`, ephemeral: true})
+        interaction.reply({content: `**Tu a désormais accès au serveur !** `, ephemeral: true})
 
 
         let Embed = new Discord.MessageEmbed()

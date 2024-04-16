@@ -6,7 +6,7 @@ module.exports = new Command({
     name: 'cleardm',
     description: "Efface tous les DM du bot",
     utilisation: "",
-    alias: ["cleardm", "dm"],
+    alias: ["cleardm", "dm", "clrdm"],
     permission: "",
     category: "",
     cooldown: 5,
@@ -24,7 +24,7 @@ module.exports = new Command({
             });
         });
         setTimeout(() => {
-            message.reply(`<:elexyr22:1067501213085597806> Tous les DM du bot ont été supprimés. J'ai supprimé ${messagesDeleted} messages. <a:valide_or:1067501018906108024>`);
+            message.reply(`Tous les DM du bot ont été supprimés. J'ai supprimé ${messagesDeleted} messages.`);
         }, 3000);
     }
 });

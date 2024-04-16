@@ -1,7 +1,6 @@
 const Discord = require("discord.js")
 const NSFW = require("discord-nsfw");
 const nsfw = new NSFW();
-const fs = require("fs");
 const Command = require("../../Structure/Command")
 
 module.exports = new Command({
@@ -12,17 +11,23 @@ module.exports = new Command({
     alias: ["fuck",],
     permission: "",
     category: "6) NSFW",
-    cooldown: 15,
+    cooldown: 10,
 
-    async run(bot, message, args, db) {
+    async run(message) {
 
-        var errMessage = "Merci de créé un salon **NSFW,** pour utilisé cette commandes ! <:18:767648849035526165>";
+        var errMessage = "Merci de créé un salon **NSFW,** pour utilisé cette commandes ! :underage:";
         if (!message.channel.nsfw) {
             return message.reply(errMessage)}
 
-            user = message.mentions.members.first()
-            if(!user) return message.channel.send("Veuillez mentionner un **Membre** *(ID marche pas)* !");
-            if(user.id == "624117399557373962") return message.reply("Tu peux pas le faire à Clemax bb !")
+            let user;
+            if(message.user ? args._hoistedOptions.length >= 1 : args.length >= 1) {
+                user = message.user ? await bot.users.fetch(args._hoistedOptions[0].value).catch(() => null) : (message.mentions.users.first() || await bot.users.fetch(args[0]).catch(() => null))
+                if(!user) return message.reply("Cet utilisateur n'existe pas...");
+            } else {
+                user = message.user ? message.user : message.author;
+            }
+            if(!user) return message.reply("Cet utilisateur n'existe pas...");
+
         const image = await nsfw.pgif();
         const embed = new Discord.MessageEmbed()
             .setTitle(`${message.author.username} baise ${user.user.username} !`)
@@ -30,8 +35,5 @@ module.exports = new Command({
             .setTimestamp()
             .setFooter(`Demandé par : ${message.author.tag}`,message.author.displayAvatarURL({ format: 'png', dynamic: true, size: 32 }))
             .setImage(image);
-            message.channel.send({embeds : [embed]})
-    
-    }
-        
-    });
+            message.reply({embeds : [embed]})
+    }});

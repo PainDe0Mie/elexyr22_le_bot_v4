@@ -23,7 +23,7 @@ module.exports = new Event("ready", async (bot) => {
 
   // bot.user.setStatus('invisible'); // Mettre le bot en invisible
 
-  console.log(chalk.bgBlue(`${bot.user.username}: En ligne sur ${bot.guilds.cache.size} serveurs !`))
+  console.log(chalk.bgBlue(`${bot.user.username} (${bot.user.id}): En ligne sur ${bot.guilds.cache.size} serveurs !`))
 
   // Obtenez le serveur souhaité
   let guild = bot.guilds.cache.get("ID");

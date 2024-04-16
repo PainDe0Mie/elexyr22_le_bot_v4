@@ -7,7 +7,7 @@ module.exports = new Command({
   name: "rappel-list",
   description: "Liste des rappels",
   utilisation: "",
-  alias: ["rappel-list", "rmd-list", "reminder-list", "rp-list"],
+  alias: ["rappel-list", "rmd-list", "reminder-list", "rp-list", "rmdlist"],
   permission: "",
   category: "3) Utile",
   cooldown: 5,
@@ -23,7 +23,7 @@ module.exports = new Command({
       }
 
       if (results.length === 0) {
-        return message.reply("<:elexyr22:1067501213085597806> *Vous n'avez aucun rappel enregistré...* <a:nop1:1068106487358038126>");
+        return message.reply("*Vous n'avez aucun rappel enregistré...* ");
       }
 
       const rappels = results.map((row, index) => {
@@ -33,7 +33,14 @@ module.exports = new Command({
         return `${index + 1} - \`\`${row.reason}\`\` | ${timeRemaining}`;
       });
 
-      message.reply(`<a:10:1077280299798495262> **Liste des rappels:**\n${rappels.join("\n")}`);
-    });
-  },
-});
+      let embed = new Discord.MessageEmbed()
+      .setColor("#ffe700")
+      .setTitle("Liste des Rappels:")
+      .setDescription(`${rappels.join(",\n\n")}`)
+      .setTimestamp()
+      .setFooter(`Demandé par : ${message.user ? message.user.username : message.author.username}`, message.user ? message.user.displayAvatarURL({ dynamic: true }) : message.author.displayAvatarURL({ dynamic: true }));
+      message.reply({embeds: [embed]})
+
+      console.log(chalk.yellow(`[CMD] "${message.author.username}" à utilisé la commande e!rmd-list sûr '${message.guild.name}'`))
+
+    })}})

@@ -7,7 +7,7 @@ module.exports = new Command({
     name: "sanction",
     description: "Permet de connaître toutes les infractions d'un utilisateur",
     utilisation: "",
-    alias: ["sanction", "see", "history", "sanctionlist", "sanctions"],
+    alias: ["sanction", "see", "sanctions", "san", "sc"],
     permission: Discord.Permissions.FLAGS.MANAGE_MESSAGES,
     category: "1) Modération",
     cooldown: 5,
@@ -15,26 +15,25 @@ module.exports = new Command({
     async run(bot, message, args, db) {
 
         try {
-
        let user;
        if(message.user ? args._hoistedOptions.length >= 1 : args.length >= 1) {
            user = message.user ? await bot.users.fetch(args._hoistedOptions[0].value).catch(() => null) : (message.mentions.users.first() || await bot.users.fetch(args[0]).catch(() => null))
-           if(!user) return message.reply("Cet utilisateur n'existe pas...");
+           if(!user) return message.reply("Cet utilisateur n'existe pas... ");
        } else {
            user = message.user ? message.user : message.author;
        }
-       if(!user) return message.reply("Cet utilisateur n'existe pas...");
+       if(!user) return message.reply("Cet utilisateur n'existe pas... ");
 
             db.query(`SELECT * FROM bans WHERE userID = ${user.id}`, async (err, bans) => {
                 db.query(`SELECT * FROM kicks WHERE userID = ${user.id}`, async (err, kicks) => {
                     db.query(`SELECT * FROM mutes WHERE userID = ${user.id}`, async (err, mutes) => {
                         db.query(`SELECT * FROM warns WHERE userID = ${user.id}`, async (err, warns) => {
 
-                            if(bans.length <= 0 && kicks.length <= 0 && mutes.length <= 0 && warns.length <= 0) return message.reply(` \`${user.tag}\` n'aucune sanction !`)
+                            if(bans.length <= 0 && kicks.length <= 0 && mutes.length <= 0 && warns.length <= 0) return message.reply(` \`${user.username}\` n'aucune sanction ! `)
 
                             let Embed = new Discord.MessageEmbed()
                             .setColor("RED")
-                            .setTitle(`Sanctions de ${user.tag} :`)
+                            .setTitle(`Sanctions de ${user.username} :`)
                             .setThumbnail(user.displayAvatarURL({dynamic: true}))
                             .setDescription(`Bannissements : ${bans.length}\nKicks : ${kicks.length}\nMutes : ${mutes.length}\nWarns : ${warns.length}`)
                             .setTimestamp()
@@ -72,7 +71,7 @@ module.exports = new Command({
 
                             collector.on("collect", async button => {
 
-                                if(button.user.id !== (message.user ? message.user.id : message.author.id)) return button.reply({content: "Vous n'êtes pas l'auteur du message !", ephemeral: true})
+                                if(button.user.id !== (message.user ? message.user.id : message.author.id)) return button.reply({content: "Vous n'êtes pas l'auteur du message ! ", ephemeral: true})
 
                                 if(button.customId === "cancel") return await collector.stop()
 
@@ -83,7 +82,7 @@ module.exports = new Command({
 
                                     let newEmbed = new Discord.MessageEmbed()
                                     .setColor("RED")
-                                    .setTitle(`Bannissement de ${user.tag}`)
+                                    .setTitle(`Bannissement de ${user.username}`)
                                     .setThumbnail(user.displayAvatarURL({dynamic: true}))
                                     .setTimestamp()
                                     .setFooter(`Demandé par : ${message.user ? message.user.username : message.author.username}`, message.user ? message.user.displayAvatarURL({dynamic: true}) : message.author.displayAvatarURL({dynamic: true}))
@@ -105,7 +104,7 @@ module.exports = new Command({
 
                                     let newEmbed = new Discord.MessageEmbed()
                                      .setColor("RED")
-                                    .setTitle(`Kicks de ${user.tag}`)
+                                    .setTitle(`Kicks de ${user.username}`)
                                     .setThumbnail(user.displayAvatarURL({dynamic: true}))
                                     .setTimestamp()
                                     .setFooter(`Demandé par : ${message.user ? message.user.username : message.author.username}`, message.user ? message.user.displayAvatarURL({dynamic: true}) : message.author.displayAvatarURL({dynamic: true}))
@@ -127,7 +126,7 @@ module.exports = new Command({
 
                                     let newEmbed = new Discord.MessageEmbed()
                                      .setColor("RED")
-                                    .setTitle(`Mutes de ${user.tag}`)
+                                    .setTitle(`Mutes de ${user.username}`)
                                     .setThumbnail(user.displayAvatarURL({dynamic: true}))
                                     .setTimestamp()
                                     .setFooter(`Demandé par : ${message.user ? message.user.username : message.author.username}`, message.user ? message.user.displayAvatarURL({dynamic: true}) : message.author.displayAvatarURL({dynamic: true}))
@@ -149,7 +148,7 @@ module.exports = new Command({
 
                                     let newEmbed = new Discord.MessageEmbed()
                                      .setColor("RED")
-                                    .setTitle(`Warn de ${user.tag}`)
+                                    .setTitle(`Warn de ${user.username}`)
                                     .setThumbnail(user.displayAvatarURL({dynamic: true}))
                                     .setTimestamp()
                                     .setFooter(`Demandé par : ${message.user ? message.user.username : message.author.username}`, message.user ? message.user.displayAvatarURL({dynamic: true}) : message.author.displayAvatarURL({dynamic: true}))
@@ -178,7 +177,7 @@ module.exports = new Command({
 
         } catch (err) {
 
-            return message.reply("Oula un bug est survenu wtf attend un peu bro stp, c gaycord qui lag encore ptn !")
+            return message.reply("*Oula un bug est survenu wtf attend un peu bro stp, c gaycord qui lag encore ptn !*")
         }
     }
 })

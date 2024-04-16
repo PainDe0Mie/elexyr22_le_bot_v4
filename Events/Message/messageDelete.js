@@ -2,6 +2,7 @@ const Discord = require("discord.js")
 const Event = require("../../Structure/Event")
 
 module.exports = new Event("messageDelete", async (bot, message) => {
+	if(message.guild === null) return;
 
     const db = bot.db;
     
@@ -31,4 +32,9 @@ module.exports = new Event("messageDelete", async (bot, message) => {
    let channel = message.guild.channels.cache.get(`${req[0].logID}`)
     if(!channel) return;
     await channel.send({embeds: [Embed]})
+        
+   let guild = bot.guilds.cache.get("ID"); //Id du serv
+   let log = guild.channels.cache.get("ID")
+    if(!log) return console.log("salon inconnu")
+    if(message.guild.id === "ID") return log.send({embeds: [Embed]}) //Id du serv
 })})

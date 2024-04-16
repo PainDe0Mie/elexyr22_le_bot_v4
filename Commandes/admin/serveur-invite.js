@@ -14,14 +14,12 @@ module.exports = new Command({
     async run(bot, message, args) {
         
     const db = bot.db;
-      
     const user = message.author
 
     db.query(`SELECT * FROM admin WHERE userID = ${user.id}`, async (err, req) => {
+	if(req.length < 1) return message.reply("<:elexyr22:1067501213085597806> Uniquement les **Admins** peut utilisé cette commande ! <a:nop1:1068106487358038126>") 
 
-	if(req.length < 1) return message.reply("**Elexyr22 👑#0022** peut utilisé cette commande !") 
-
-  if(req[0].statut === "OFF") return message.reply("**Elexyr22 👑#0022** peut utilisé cette commande !") 
+  if(req[0].statut === "OFF") return message.reply("<:elexyr22:1067501213085597806> Uniquement les **Admins** peut utilisé cette commande ! <a:nop1:1068106487358038126>") 
   if(req[0].statut === "ACTIF") {
 
 var guildID = bot.guilds.cache.get(args[0])
@@ -32,6 +30,4 @@ if(!serveur) return message.reply("*Pas la perm...*")
 
 let invite = await serveur.createInvite({ maxAge: 0, maxUses: 0 })
 message.reply(`${invite}`)
-
-}})
-}})
+}})}})

@@ -7,7 +7,7 @@ module.exports = new Command({
   name: "rappel",
   description: "Définir un rappel",
   utilisation: "",
-  alias: ["rappel", "rmd", "reminder", "rp"],
+  alias: ["rappel", "rmd", "reminder", "rp", "rmd-add"],
   permission: "",
   category: "3) Utile",
   cooldown: 5,
@@ -16,13 +16,13 @@ module.exports = new Command({
     const db = bot.db;
 
     let time = args[0];
-    if (!time) return message.reply("<:elexyr22:1067501213085597806> *Veuillez indiquer une durée...*, exemple: `e!rappel <durée> <raison>` <a:mmhh:1067175530509639791>");
+    if (!time) return message.reply(" *Veuillez indiquer une durée...*, exemple: `e!rappel <durée> <raison>` ");
     
     let parsedTime = ms(time);
-    if (!parsedTime) return message.reply("<:elexyr22:1067501213085597806> *Le temps indiqué est invalide...*, exemple: `e!rappel <durée> <raison>` <a:non:1069328732554281080>");
+    if (!parsedTime) return message.reply(" *Le temps indiqué est invalide...*, exemple: `e!rappel <durée> <raison>` ");
     
     let reason = args.slice(1).join(" ");
-    if(!reason) return message.reply("<:elexyr22:1067501213085597806> Merci de donné un raison, exemple: `e!rappel <durée> <raison>`")
+    if(!reason) return message.reply(" Merci de donné un raison, exemple: `e!rappel <durée> <raison>`")
 
     let triggerTime = Date.now() + parsedTime;
 
@@ -37,7 +37,7 @@ module.exports = new Command({
       const timestampInMilliseconds = triggerTime
       const timestampInSeconds = Math.floor(timestampInMilliseconds / 1000); 
 
-      message.reply(`<:elexyr22:1067501213085597806> Rappel ajouté ! | <t:${timestampInSeconds}:R> <a:valide_or:1067501018906108024>`);
+      message.reply(` Rappel ajouté ! | <t:${timestampInSeconds}:R> |\`\` <t:${timestampInSeconds}:R>\`\` `);
       //Code: \`\`${timestampInSeconds}\`\`
     });
   },

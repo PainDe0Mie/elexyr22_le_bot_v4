@@ -17,7 +17,7 @@ module.exports = new Command({
 
 const row1 = new Discord.MessageActionRow().addComponents(
 new MessageButton()
-.setURL("https://status.watchbot.app/bot/1013135812545753119")
+.setURL("https://stats.uptimerobot.com/3qZjBs77nx")
 .setLabel('> Uptime <')
 .setEmoji("🟢")
 .setStyle('LINK'),)
@@ -27,5 +27,5 @@ const embed = new Discord.MessageEmbed()
 .setDescription(`🏓 Mon ping est de : **${bot.ws.ping} ms !**`)
 .setFooter(`Demandé par : ${message.user ? message.user.username : message.author.username}`, message.user ? message.user.displayAvatarURL({dynamic: true}) : message.author.displayAvatarURL({dynamic: true}))
 message.reply({embeds: [embed], components: [row1]})
-console.log(chalk.yellow(`[CMD] "${message.author.tag}" à utilisé la commande e!ping sûr '${message.guild.name}'`))
+console.log(chalk.yellow(`[CMD] "${message.author.username}" à utilisé la commande e!ping sûr '${message.guild.name}'`))
 }})

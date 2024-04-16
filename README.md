@@ -8,4 +8,4 @@ Merci d'avoir choisi ce projet !
 
 Mon site: https://elexyr22.fr/
 
-Dernière MAJ: 16/04/2024
+Dernière MAJ: **16/04/2024**

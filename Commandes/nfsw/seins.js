@@ -8,7 +8,7 @@ module.exports = new Command({
     name: "seins",
     description: "|| Image d'un seins ||",
     utilisation: "",
-    alias: ["seins",],
+    alias: ["seins"],
     permission: "",
     category: "6) NSFW",
     cooldown: 10,

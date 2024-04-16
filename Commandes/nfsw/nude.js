@@ -5,26 +5,27 @@ const Command = require("../../Structure/Command")
 
 module.exports = new Command({
 
-    name: "seins",
-    description: "|| Image d'un seins ||",
+    name: "nude",
+    description: "|| Image d'une meuf nue ||",
     utilisation: "",
-    alias: ["seins",],
+    alias: ["nude"],
     permission: "",
     category: "6) NSFW",
     cooldown: 10,
 
     async run(message) {
 
-        var errMessage = "<:elexyr22:1067501213085597806> Merci de créé un salon **NSFW,** pour utilisé cette commandes ! :underage:";
+        var errMessage = "Merci de créé un salon **NSFW,** pour utilisé cette commandes ! :underage:";
         if (!message.channel.nsfw) {
             return message.reply(errMessage)}
 
-            const image = await nsfw.boobs();
+            const image = await nsfw.ass();
             const embed = new Discord.MessageEmbed()
-                .setTitle(`Image de seins = `)
+                .setTitle(`Voici une Nude Random:`)
                 .setColor('RANDOM')
                 .setTimestamp()
                 .setFooter(`Demandé par : ${message.author.tag}`,message.author.displayAvatarURL({ format: 'png', dynamic: true, size: 32 }))
                 .setImage(image);
                 message.reply({embeds : [embed]})
+    
     }});

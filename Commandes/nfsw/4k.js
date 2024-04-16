@@ -18,6 +18,7 @@ module.exports = new Command({
         var errMessage = "Merci de créé un salon **NSFW,** pour utilisé cette commandes ! :underage:";
         if (!message.channel.nsfw) {
             return message.reply(errMessage)}
+
         const image = await nsfw.fourk();
         const embed = new Discord.MessageEmbed()
             .setTitle(`Image 4k:`)

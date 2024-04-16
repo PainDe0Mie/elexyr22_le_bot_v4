@@ -15,13 +15,13 @@ module.exports = new Command({
 
     async run(message) {
 
-        var errMessage = "<:elexyr22:1067501213085597806> Merci de créé un salon **NSFW,** pour utilisé cette commandes ! :underage:";
+        var errMessage = "Merci de créé un salon **NSFW,** pour utilisé cette commandes ! :underage:";
         if (!message.channel.nsfw) {
             return message.reply(errMessage)}
 
             const image = await nsfw.boobs();
             const embed = new Discord.MessageEmbed()
-                .setTitle(`Image de seins = `)
+                .setTitle(`Image de seins: `)
                 .setColor('RANDOM')
                 .setTimestamp()
                 .setFooter(`Demandé par : ${message.author.tag}`,message.author.displayAvatarURL({ format: 'png', dynamic: true, size: 32 }))

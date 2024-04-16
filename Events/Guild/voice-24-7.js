@@ -1,9 +1,10 @@
 const Discord = require("discord.js");
 const { joinVoiceChannel } = require('@discordjs/voice');
 const Event = require("../../Structure/Event");
+const chalk = require("chalk");
 
 module.exports = new Event("ready", async (bot) => {
-  const voiceChannelId = "1186064749113380946"
+  const voiceChannelId = "ID"
   if (!voiceChannelId) return;
 
   const voiceChannel = bot.channels.cache.get(voiceChannelId);
@@ -11,7 +12,7 @@ module.exports = new Event("ready", async (bot) => {
     console.log(`Le salon auto-vocal existe pas`);
     return}
     
-    console.log("Bot bien connecté au vocal Commu")
+    console.log(chalk.bgRed("Bot connecté au vocal V.I.P"))
 
   const connection = joinVoiceChannel({
     channelId: voiceChannel.id,

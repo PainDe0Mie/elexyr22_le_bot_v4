@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 const Event = require("../../Structure/Event");
 
 module.exports = new Event("voiceStateUpdate", async (bot, oldState, newState) => {
-if(newState.guild.id !== "1040701512298541106") return; // id de la commu
+if(newState.guild.id !== "ID") return; // id du serv
 
         const oldChannel = oldState.channel;
         const newChannel = newState.channel;
@@ -20,9 +20,3 @@ if(newState.guild.id !== "1040701512298541106") return; // id de la commu
             if (role) {
               oldState.member.roles.remove(role); 
         }}})
-
-
-
-
-
-

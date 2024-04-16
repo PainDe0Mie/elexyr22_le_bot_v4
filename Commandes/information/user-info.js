@@ -20,11 +20,11 @@ module.exports = new Command({
       let user;
        if(message.user ? args._hoistedOptions.length >= 1 : args.length >= 1) {
            user = message.user ? await bot.users.fetch(args._hoistedOptions[0].value).catch(() => null) : (message.mentions.users.first() || await bot.users.fetch(args[0]).catch(() => null))
-           if(!user) return message.reply("<:elexyr22:1067501213085597806> Cet utilisateur n'existe pas... <a:nop1:1068106487358038126>");
+           if(!user) return message.reply(" Cet utilisateur n'existe pas... ");
        } else {
            user = message.user ? message.user : message.author;
        }
-       if(!user) return message.reply("<:elexyr22:1067501213085597806> Cet utilisateur n'existe pas... <a:nop1:1068106487358038126>");
+       if(!user) return message.reply(" Cet utilisateur n'existe pas... ");
        
         const guildMember = await message.guild.members.fetch({ user, force: true }).catch(() => null);
         const joinedDate = guildMember ? guildMember.joinedAt : null;
@@ -41,7 +41,7 @@ module.exports = new Command({
                 .setColor("RANDOM")
                 .setTitle("User-Info :")
                 .setThumbnail(user.displayAvatarURL({dynamic: true}))
-                .setDescription(`**Informations principales :** \n :grinning: Tag d'utilisateur : \`\`${user.username}\`\` \n :id: ID : \`\`${user.id}\`\` \n :robot: Est un bot : \`\`${user.bot ? "Oui" : "Non"}\`\` \n\n Autres informations : \n:clock: Compte créé le : <t:${Math.floor(user.createdAt / 1000)}:F>  \n:busts_in_silhouette: Serveur(s) en commun :  \`\`${guildsInCommonCount}\`\` serveur(s)\n\n Informations liées au serveur :\n :clock10: A rejoint le serveur : ${formattedDate} \n\n **Informations Blacklist :** \n${bl}`)
+                .setDescription(`**Informations principales :** \n :grinning: Tag d'utilisateur : \`\`${user.username}\`\` \n :id: ID : \`\`${user.id}\`\` \n :robot: Est un bot : \`\`${user.bot ? "Oui" : "Non"}\`\` \n\n Autres informations : \n:clock: Compte créé le: <t:${Math.floor(user.createdAt / 1000)}:F>  \n:busts_in_silhouette: Serveur(s) en commun :  \`\`${guildsInCommonCount}\`\` serveur(s)\n\n Informations liées au serveur :\n :clock10: A rejoint le serveur : ${formattedDate} \n\n **Informations Blacklist :** \n${bl}`)
                 .setImage(await (await bot.users.fetch(user.id, {force: true})).bannerURL({dynamic: true, size: 4096}))
                 .setTimestamp()
                 .setFooter(`Demandé par : ${message.user ? message.user.username : message.author.username}`, message.user ? message.user.displayAvatarURL({dynamic: true}) : message.author.displayAvatarURL({dynamic: true}))

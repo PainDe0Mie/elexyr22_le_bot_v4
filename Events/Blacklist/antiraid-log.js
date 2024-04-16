@@ -22,14 +22,14 @@ module.exports = new Event("guildMemberAdd", async (bot, member) => {
         if(req[0].raid === "on") {
 
             try {
-                /* const embed1 = new Discord.MessageEmbed()
+                 const embed1 = new Discord.MessageEmbed()
                 .setColor("RED")
                 .setTitle(`ANTI-RAID INTELLIGENT 6.0 :`)
                 .setDescription(`<a:ftnl:933837014145589298> ・Un **Raid Token** en cours sûr :  \`${serv}\`, \n réessaye dans __10 min,__ après que j'ai **banni** tout les **TOKEN !**`)
                 .setTimestamp()
                 .setFooter(`Anti-Raid intelligent 6.0 by Elexyr22👑 #0022`, `https://cdn.discordapp.com/attachments/765158755905961984/847433801013264404/PP_FR.gif`)
 
-                await member.user.send({ embeds: [embed1] }) */
+                await member.user.send({ embeds: [embed1] }) 
             } catch (err) {} 
 
             await member.kick(" L'anti-Raid est bien activé !")

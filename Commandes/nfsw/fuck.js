@@ -8,7 +8,7 @@ module.exports = new Command({
     name: "fuck",
     description: "|| Fait l'amour à une personne ||",
     utilisation: "",
-    alias: ["fuck",],
+    alias: ["fuck"],
     permission: "",
     category: "6) NSFW",
     cooldown: 10,

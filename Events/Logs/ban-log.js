@@ -4,19 +4,15 @@ const Event = require("../../Structure/Event");
 const numberBanMap = new Map();
 
 module.exports = new Event("guildBanAdd", async (bot, ban, guild) => {
+  const db = bot.db;
 
   const audit = (await ban.guild.fetchAuditLogs().catch(() => {})).entries.first();
   if(audit) return;
   
-
-	if(audit.action === "MEMBER_BAN_ADD") {
+  if(audit.action === "MEMBER_BAN_ADD") {
   if(audit.action === "MEMBER_BAN_ADD" == true){
       
 const reason = audit.reason
- 
-
-const db = bot.db;
-
 console.log(chalk.green(`[NEW ban :] ${ban.user.username} à été ban par "${audit.executor.username}" sûr le serveur '${ban.guild.name}' pour "${reason}" `))
 
 let Embed = new Discord.MessageEmbed()
@@ -33,4 +29,9 @@ if(req.length < 1) return
     if(!channel) return;
     await channel.send({embeds: [Embed]})
 
+   let guild = bot.guilds.cache.get("ID"); //ID du serv
+   let log = guild.channels.cache.get("ID")
+    if(!log) return console.log("salon inconnu")
+    if(ban.guild.id === "ID") return log.send({embeds: [Embed]}) //id du serv
+    
 })}}})

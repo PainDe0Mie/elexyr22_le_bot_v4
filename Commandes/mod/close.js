@@ -14,9 +14,9 @@ module.exports = new Command({
 
     async run(bot, message, args, db) {
         
-                        message.channel.delete() 
+message.channel.delete() 
 
-		    console.log(chalk.yellow(`[CMD] "${message.author.tag}"" à utilisé la commande e!close sûr '${message.guild.name}'`))
-            if(message.guild.id !== "1040701512298541106") return;
-            const salon = bot.channels.cache.get("1084195196583018536")
-            salon.send(` ${message.author.tag} à utilisé la commande **e!close.** `)}})
+console.log(chalk.yellow(`[CMD] "${message.author.username}"" à utilisé la commande e!close sûr '${message.guild.name}'`))
+if(message.guild.id !== "ID") return; //ID de la guild
+const salon = bot.channels.cache.get("ID")
+salon.send(` ${message.author.username} à utilisé la commande **e!close.** `)}})

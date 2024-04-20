@@ -30,4 +30,4 @@ module.exports = new Command({
       message.reply({embeds: [embed], components: [row1]})
       console.log(chalk.yellow(`[CMD] "${message.author.username}" à utilisé la commande e!github sûr '${message.guild.name}'`))
     }
-})g
+})

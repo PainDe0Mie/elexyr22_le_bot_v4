@@ -45,11 +45,6 @@ let page5 = new MessageEmbed({
    color: "#ffe700"
 });
 
-let page6 = new MessageEmbed({
-    title: '6) NSFW',
-    description: `${bot.commands.filter(cmd => cmd.category === "6) NSFW").map(cmd => "> `" + req[0].prefix + cmd.name + "` ➔ " + cmd.description).join("\n")}`,
-    color: "#ffe700"
-});
 
 let page7 = new MessageEmbed({
     title: '7) Même',
@@ -58,7 +53,7 @@ let page7 = new MessageEmbed({
 });
 
 
-let pages = [page1, page2, page3, page4, page5, page6, page7]; 
+let pages = [page1, page2, page3, page4, page5, page7]; 
 
 paginate(message, pages); // PAS TOUCHE
     });

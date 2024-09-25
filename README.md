@@ -6,6 +6,6 @@ Si vous rencontrez des problèmes ou avez besoin d'aide, veuillez faire un Pull 
 
 Merci d'avoir choisi ce projet !
 
-Mon site: https://elexyr22.fr/
+Mon site: [https://elexyr22.fr/](https://e-bot.fr/)
 
-Dernière MAJ: **16/04/2024**
+Dernière MAJ: **25/09/2024**
